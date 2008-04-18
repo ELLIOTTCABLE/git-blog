@@ -1,0 +1,51 @@
+git-blog
+========
+
+git-blog intends to be blogging, simplified. You'll write your posts in your
+favorite text editor, with your favorite markup. Then save the post's file,
+`git-add` the post, and then `git-push origin master`. git-blog, running on
+your server, will catch the push and parse the post to your static HTML blog.
+Fast, no dynamic code being run on every load, free post versioning (git
+revisions), free sections (git branches), freedom of mind.
+
+Philosophy & goals
+------------------
+
+git-blog will never be featureful, but it will also never be bloated. I doubt
+I will ever do anything more than parsing the posts to static HTML on every
+git-push.
+
+Getting
+-------
+
+The authoritative source for this project is available at
+<http://github.com/elliottcable/git-blog>. You can clone your own copy with the
+following command:
+
+    git clone git://github.com/elliottcable/git-blog.git
+
+If you want to make changes to the codebase, you need to fork your own github
+repository for said changes. Send a pullrequest to [elliottcable][5]
+when you've got something ready for the master that you think should be
+integrated into the root source.
+
+Bugs or feature requests can be submitted by forking a repository as
+previously described, and then using [ditz][6] to add an issue.
+
+  [5]: <http://github.com/elliottcable> (elliottcable on GitHub)
+  [6]: <http://ditz.rubyforge.org/> (Ditz issue tracking)
+
+Requirements
+------------
+
+To run git-blog, you need the following gems:
+
+* haml (if you wish to create your templates in haml)
+* redcloth (if you wish to write your posts in Markdown or Textile)
+
+To develop and contribute to git-blog, you also need:
+
+* rspec
+* rake
+* rcov
+* ditz
