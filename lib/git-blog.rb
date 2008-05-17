@@ -1,4 +1,4 @@
-GB_LOC = File.expand_path(File.dirname(__FILE__))
+GB_LOC = File.expand_path("../")
 require 'rubygems'
 require 'git' # Ruby/Git
 require 'logger'
