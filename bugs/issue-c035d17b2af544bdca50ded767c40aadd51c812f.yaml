@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: post-recieve deploy hook
+desc: ""
+type: :feature
+component: git-blog
+release: 
+reporter: elliottcable <git@elliottcable.name>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-17 12:18:51.739512 Z
+references: []
+
+id: c035d17b2af544bdca50ded767c40aadd51c812f
+log_events: 
+- - 2008-05-17 12:18:52.224012 Z
+  - elliottcable <git@elliottcable.name>
+  - created
+  - ""
