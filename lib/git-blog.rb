@@ -16,10 +16,10 @@ task :initialize do
   mkdir 'posts'
   mkdir 'design'
   %w(welcome_to_your_git_blog.markdown .gitignore).each do |file|
-    cp GitBlog::Location / :defaults / file, 'posts'
+    cp GitBlog::Location / :prepped / :posts / file, 'posts'
   end
   %w(main.css post.haml index.haml).each do |file|
-    cp GitBlog::Location / :defaults / file, 'design'
+    cp GitBlog::Location / :prepped / :design / file, 'design'
   end
   
   blog.add
@@ -41,7 +41,7 @@ end
 desc 'Prepare the blog to be served (configures hooks)'
 task :servable do
   is_initialized? File.expand_path('.')
-  cp GitBlog::Location / :defaults / 'post-recieve', '.git' / :hooks
+  cp GitBlog::Location / :prepped / 'post-recieve.hook', '.git' / :hooks / 'post-recieve'
 end
 
 desc 'Create and open for editing a new post'
