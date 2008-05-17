@@ -15,6 +15,7 @@ task :initialize do
   cd path
   mkdir 'posts'
   mkdir 'design'
+  cp GitBlog::Location / :prepped / '.gitignore', '.'
   %w(welcome_to_your_git_blog.markdown .gitignore).each do |file|
     cp GitBlog::Location / :prepped / :posts / file, 'posts'
   end
