@@ -69,7 +69,7 @@ task :post do
     end
   end
   
-  system "#{ENV['EDITOR']} #{temporary_post}"
+  system "#{ENV['VISUAL']} #{temporary_post}"
   
   first_line = File.open(temporary_post, File::RDWR|File::CREAT).gets.chomp
   markup = case first_line
