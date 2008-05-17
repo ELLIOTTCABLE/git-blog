@@ -1,11 +1,7 @@
-GB_LOC = File.expand_path("../")
-require 'rubygems'
-require 'git' # Ruby/Git
-require 'logger'
 require 'fileutils'
 include FileUtils
 
-require 'git-blog/core_ext'
+require 'git-blog/core'
 
 desc 'Setup the blog repository'
 task :initialize do
@@ -19,9 +15,11 @@ task :initialize do
   cd path
   mkdir 'posts'
   mkdir 'design'
-  cp File.join(GB_LOC, 'defaults', 'welcome_to_your_git_blog.markdown'), 'posts'
+  %w(welcome_to_your_git_blog.markdown .gitignore).each do |file|
+    cp File.join(GitBlog::Location, 'defaults', file), 'posts'
+  end
   %w(main.css post.haml index.haml).each do |file|
-    cp File.join(GB_LOC, 'defaults', file), 'design'
+    cp File.join(GitBlog::Location, 'defaults', file), 'design'
   end
   
   blog.add
@@ -62,8 +60,8 @@ task :post do
   
   unless @resume
     File.open temporary_post, File::RDWR|File::TRUNC|File::CREAT do |post|
-      post.puts 'Title here'
-      post.puts '=========='
+      post.puts  'Replace this text with your title!'
+      post.puts  '=================================='
       post.print "\n"
       post.close
     end
@@ -73,18 +71,13 @@ task :post do
   
   first_line = File.open(temporary_post, File::RDWR|File::CREAT).gets.chomp
   markup = case first_line
-    when /^\</        then 'html'
+    when /^\</        then 'xhtml'
     when /^\%/        then 'haml'
     when /^\#|h\d\./  then 'textile'
     else                   'markdown'
   end
-  title_regex = case markup
-    when 'html'     then /^<[^>]+>(.*)<[^>]+>$/
-    when 'haml'     then /^%[^\s\{]+(?:\{[^\}]\})? (.*)$/
-    when 'textile'  then /^h\d(?:[^\s\{]|\{[^\}]*\})*\. (.*)$/
-    else                 /^(.*)$/
-  end
-  title = (first_line.match title_regex)[1]
+
+  title = (first_line.match GitBlog::TitleRegexen[markup])[1]
   path = :posts / title.slugize.send(markup.to_sym)
   mv temporary_post, path
   
@@ -102,4 +95,38 @@ task :push, :remote_name do |_, params|
   remote = blog.remote remote_name
   blog.push remote
   puts "Changes pushed to #{remote_name}."
+end
+
+desc 'Remove all generated xhtml'
+task :clobber do
+  Dir['posts/*.xhtml'].each do |path|
+    rm_f path
+  end
+end
+
+desc 'Generate xhtml files from posts and design'
+task :deploy => :clobber do
+  Dir['posts/*.*'].each do |path|
+    markup = File.extname(path).downcase.gsub(/^\./,'')
+    content = IO.read path
+    first_line = content.match(/^(.*)\n/)[1]
+    
+    post_title = (first_line.match GitBlog::TitleRegexen[markup])[1]
+    parsed = begin
+      parser = GitBlog::Parsers.const_get(markup.gsub(/\b\w/){$&.upcase})
+      out = parser.send :parse, content
+      out
+    end
+    
+    template = IO.read :design/:post.haml
+    
+    completed = Haml::Engine.new(template, :filename => :design/:post.haml).
+      to_html(Object.new, {:content => parsed, :title => post_title})
+    
+    destination = path.gsub /.#{markup}$/, '.xhtml'
+    file = File.open destination, File::RDWR|File::TRUNC|File::CREAT
+    file.puts completed
+    file.close
+    puts "#{path} -> #{destination} (as #{markup})"
+  end
 end
