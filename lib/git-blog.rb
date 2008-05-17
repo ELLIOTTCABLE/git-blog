@@ -27,22 +27,31 @@ task :initialize do
   blog.commit_all("A bird... no, a plane... no, a git-blog!")
 end
 
-desc 'Attach the blog to a GitHub repository'
+desc 'Attach the blog to a GitHub repository - can also clone an existing git-blog repository here'
 task :github, :user_name, :repo_name do |_, params|
   path = File.expand_path '.'
   user_name = params[:user_name].nil? ? %x(whoami).chomp : params[:user_name]
   repo_name = params[:repo_name].nil? ? File.basename(path) : params[:repo_name]
   
-  is_initialized? path
+  github_url = "git@github.com:#{user_name.downcase}/#{repo_name.downcase}.git"
   
-  github = blog.add_remote 'github', "git@github.com:#{user_name.downcase}/#{repo_name.downcase}.git"
-  blog.push github
+  if File.directory? File.join(path, 'posts') and
+    (blog = Git.open path rescue false)
+    
+    github = blog.add_remote 'github', github_url
+    blog.push github
+  else
+    system "git-init"
+    system "git-remote add -f github #{github_url}"
+    system "git checkout -b master github/master"
+  end
 end
 
 desc 'Prepare the blog to be served (configures hooks)'
 task :servable do
-  is_initialized? File.expand_path('.')
-  cp GitBlog::Location / :prepped / 'post-recieve.hook', '.git' / :hooks / 'post-recieve'
+  should_be_initialized File.expand_path('.')
+  mv_f '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
+  cp GitBlog::Location / :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
 end
 
 desc 'Create and open for editing a new post'
@@ -50,7 +59,7 @@ task :post do
   @resume = false
   temporary_post = :post_in_progress.markdown
   
-  is_initialized? File.expand_path('.')
+  should_be_initialized File.expand_path('.')
   
   if File.file? temporary_post
     puts '** You have an unfinished post from before,'
@@ -96,7 +105,7 @@ end
 
 desc 'Push changes'
 task :push, :remote_name do |_, params|
-  is_initialized? File.expand_path('.')
+  should_be_initialized File.expand_path('.')
   
   remote_name = params[:remote_name].nil? ? 'github' : params[:remote_name]
   blog = Git.open '.'
@@ -114,7 +123,7 @@ end
 
 desc 'Generate xhtml files from posts and design'
 task :deploy => :clobber do
-  is_initialized? File.expand_path('.')
+  should_be_initialized File.expand_path('.')
   
   Dir['posts/*.*'].each do |path|
     markup = File.extname(path).downcase.gsub(/^\./,'')
@@ -141,7 +150,7 @@ task :deploy => :clobber do
   end
 end
 
-def is_initialized?(path)
+def should_be_initialized path
   raise "** You haven't used `rake initialize` yet." unless
     File.directory? File.join(path, 'posts') and
     (blog = Git.open path rescue false)
