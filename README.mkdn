@@ -40,6 +40,7 @@ Requirements
 
 To run git-blog, you need the following gems:
 
+* Ruby/Git
 * haml (if you wish to create your templates in haml)
 * redcloth (if you wish to write your posts in Markdown or Textile)
 
