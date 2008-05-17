@@ -5,8 +5,8 @@ type: :feature
 component: git-blog
 release: 
 reporter: elliottcable <git@elliottcable.name>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-17 12:18:51.739512 Z
 references: []
 
@@ -15,4 +15,8 @@ log_events:
 - - 2008-05-17 12:18:52.224012 Z
   - elliottcable <git@elliottcable.name>
   - created
+  - ""
+- - 2008-05-17 22:27:18.153928 Z
+  - elliottcable <git@elliottcable.name>
+  - closed issue with disposition fixed
   - ""

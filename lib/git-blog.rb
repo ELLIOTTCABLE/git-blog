@@ -16,10 +16,10 @@ task :initialize do
   mkdir 'posts'
   mkdir 'design'
   %w(welcome_to_your_git_blog.markdown .gitignore).each do |file|
-    cp File.join(GitBlog::Location, 'defaults', file), 'posts'
+    cp GitBlog::Location / :defaults / file, 'posts'
   end
   %w(main.css post.haml index.haml).each do |file|
-    cp File.join(GitBlog::Location, 'defaults', file), 'design'
+    cp GitBlog::Location / :defaults / file, 'design'
   end
   
   blog.add
@@ -32,18 +32,24 @@ task :github, :user_name, :repo_name do |_, params|
   user_name = params[:user_name].nil? ? %x(whoami).chomp : params[:user_name]
   repo_name = params[:repo_name].nil? ? File.basename(path) : params[:repo_name]
   
-  raise "** You haven't used `rake initialize` yet." unless
-    File.directory? File.join(path, 'posts') and
-    (blog = Git.open path rescue false)
+  is_initialized? path
   
   github = blog.add_remote 'github', "git@github.com:#{user_name.downcase}/#{repo_name.downcase}.git"
   blog.push github
+end
+
+desc 'Prepare the blog to be served (configures hooks)'
+task :servable do
+  is_initialized? File.expand_path('.')
+  cp GitBlog::Location / :defaults / 'post-recieve', '.git' / :hooks
 end
 
 desc 'Create and open for editing a new post'
 task :post do
   @resume = false
   temporary_post = :post_in_progress.markdown
+  
+  is_initialized? File.expand_path('.')
   
   if File.file? temporary_post
     puts '** You have an unfinished post from before,'
@@ -89,6 +95,8 @@ end
 
 desc 'Push changes'
 task :push, :remote_name do |_, params|
+  is_initialized? File.expand_path('.')
+  
   remote_name = params[:remote_name].nil? ? 'github' : params[:remote_name]
   blog = Git.open '.'
   remote = blog.remote remote_name
@@ -105,6 +113,8 @@ end
 
 desc 'Generate xhtml files from posts and design'
 task :deploy => :clobber do
+  is_initialized? File.expand_path('.')
+  
   Dir['posts/*.*'].each do |path|
     markup = File.extname(path).downcase.gsub(/^\./,'')
     content = IO.read path
@@ -117,9 +127,9 @@ task :deploy => :clobber do
       out
     end
     
-    template = IO.read :design/:post.haml
+    template = IO.read :design / :post.haml
     
-    completed = Haml::Engine.new(template, :filename => :design/:post.haml).
+    completed = Haml::Engine.new(template, :filename => :design / :post.haml).
       to_html(Object.new, {:content => parsed, :title => post_title})
     
     destination = path.gsub /.#{markup}$/, '.xhtml'
@@ -128,4 +138,10 @@ task :deploy => :clobber do
     file.close
     puts "#{path} -> #{destination} (as #{markup})"
   end
+end
+
+def is_initialized?(path)
+  raise "** You haven't used `rake initialize` yet." unless
+    File.directory? File.join(path, 'posts') and
+    (blog = Git.open path rescue false)
 end
