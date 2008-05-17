@@ -1,0 +1,13 @@
+@import url("http://design.elliottcable.info/ystyle/compiled/ystyle.css");
+
+body {
+  width: 45em;
+  margin: auto;
+  font: 11pt/1.6 Georgia, "Times New Roman", Times, serif;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  text-transform: uppercase;
+}
