@@ -62,8 +62,7 @@ task :post do
     File.open temporary_post, File::RDWR|File::TRUNC|File::CREAT do |post|
       post.puts  'Replace this text with your title!'
       post.puts  '=================================='
-      post.print "\n"
-      post.close
+      post.print "\n"; post.close
     end
   end
   
