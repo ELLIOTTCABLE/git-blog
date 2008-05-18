@@ -16,8 +16,10 @@ puts pwd # wtf is going on
 system 'pwd' # wtf is going on
 
 puts 're-checking out'
-system 'cd ../ ; git-checkout -f master' # Should force the push to actually go live
+system 'cd ../ ; pwd ; git-checkout -f master' # Should force the push to actually go live
 puts 'cding'
 cd '../'
+puts 're-checking out, again'
+system 'pwd; git-checkout -f master'
 puts 'Re-deploying blog...'
 system 'rake deploy'
