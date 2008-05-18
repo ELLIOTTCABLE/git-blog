@@ -13,5 +13,6 @@ include FileUtils
 # Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
 
 cd '../'
+system 'git-checkout -f master' # Should force the push to actually go live
 puts 'Re-deploying blog...'
 system 'rake deploy'
