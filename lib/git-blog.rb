@@ -30,6 +30,7 @@ task :initialize do
       chmod 0664, file
     end
   end
+  chmod 0755, '.git'
   chmod 0664, '.gitignore'
   chmod 0664, :posts / '.gitignore'
   
@@ -60,9 +61,11 @@ end
 desc 'Prepare the blog to be served (configures hooks)'
 task :servable do
   should_be_initialized File.expand_path('.')
-  mv_f '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
+  
+  mv '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
   cp GitBlog::Location / :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
   chmod 0775, '.git' / :hooks / 'post-receive'
+  
   puts '** git-blog is prepared for serving (git post-recieve hook prepared)'
 end
 
