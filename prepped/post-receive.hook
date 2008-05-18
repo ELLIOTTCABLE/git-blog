@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby --trace
 # require 'rubygems'
 # require 'git'
 require 'fileutils'
@@ -12,7 +12,7 @@ include FileUtils
 
 # Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
 
+system 'cd ../ ; git-checkout -f master' # Should force the push to actually go live
 cd '../'
-system 'git-checkout -f master' # Should force the push to actually go live
 puts 'Re-deploying blog...'
 system 'rake deploy'
