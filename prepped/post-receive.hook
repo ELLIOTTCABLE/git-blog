@@ -1,16 +1,17 @@
 #!/usr/bin/env ruby
-require 'rubygems'
-require 'git'
+# require 'rubygems'
+# require 'git'
 require 'fileutils'
 include FileUtils
 
-Repo = Git.open File.expand_path('../../')
+# Repo = Git.open File.expand_path('../')
+# 
+# Old     = Repo.object(ARGV.shift) # aa453216d1b3e49e7f6f98441fa56946ddcd6a20
+# New     = Repo.object ARGV.shift # 68f7abf4e6f922807889f52bc043ecd31b79f814
+# Refname = ARGV.shift # refs/heads/master
 
-Old     = Repo.object ARGV.shift # aa453216d1b3e49e7f6f98441fa56946ddcd6a20
-New     = Repo.object ARGV.shift # 68f7abf4e6f922807889f52bc043ecd31b79f814
-Refname = ARGV.shift # refs/heads/master
-
-Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
+# Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
 
 cd '../'
+puts 'Re-deploying blog...'
 system 'rake deploy'
