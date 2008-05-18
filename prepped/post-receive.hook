@@ -15,7 +15,9 @@ include FileUtils
 puts pwd # wtf is going on
 system 'pwd' # wtf is going on
 
+puts 're-checking out'
 system 'cd ../ ; git-checkout -f master' # Should force the push to actually go live
+puts 'cding'
 cd '../'
 puts 'Re-deploying blog...'
 system 'rake deploy'
