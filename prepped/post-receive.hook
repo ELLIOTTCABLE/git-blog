@@ -12,5 +12,5 @@ Refname = ARGV.shift # refs/heads/master
 
 Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
 
-cd '../../'
+cd '../'
 system 'rake deploy'
