@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby --trace
+#!/usr/bin/env ruby
 # require 'rubygems'
 # require 'git'
 require 'fileutils'
@@ -11,6 +11,9 @@ include FileUtils
 # Refname = ARGV.shift # refs/heads/master
 
 # Branch  = Repo.branches[Refname.split('/')[2..-1].join('/')] # Not sure if I trust this completely...
+
+puts pwd # wtf is going on
+system 'pwd' # wtf is going on
 
 system 'cd ../ ; git-checkout -f master' # Should force the push to actually go live
 cd '../'
