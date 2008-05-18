@@ -4,9 +4,12 @@
   %head
     %meta{:'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml;charset=utf-8'}
     %title= title
-    %link{:rel => 'stylesheet', :href => '/design/main.css', :type => 'text/css;charset=utf-8'}
+    %link{:rel => 'stylesheet', :href => '../design/main.css', :type => 'text/css;charset=utf-8'}
     / %link{:rel => 'alternate', :href => '/posts/feed.rss', :type => 'application/rss+xml', :title => 'Feed (RSS 2.0)'}
     / %link{:rel => 'alternate', :href => '/posts/feed.atom', :type => 'application/atom+xml', :title => 'Feed (Atom)'}
   %body
     %h1= title
-    .content= content
+    #content= content
+    #footer
+      :markdown
+        powered by [git-blog](http://github.com/elliottcable/git-blog "elliottcable's git-blog on GitHub"), by [elliottcable](http://elliottcable.name "elliottcable")
