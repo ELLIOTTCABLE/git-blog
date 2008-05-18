@@ -23,6 +23,14 @@ task :initialize do
     cp GitBlog::Location / :prepped / :design / file, 'design'
   end
   
+  Dir['**/**'].each do |file|
+    if File.directory? file
+      chmod 0775, file
+    else
+      chmod 0664, file
+    end
+  end
+  
   blog.add
   blog.commit_all("A bird... no, a plane... no, a git-blog!")
 end
@@ -52,6 +60,8 @@ task :servable do
   should_be_initialized File.expand_path('.')
   mv_f '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
   cp GitBlog::Location / :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
+  chmod 0775, '.git' / :hooks / 'post-receive'
+  puts '** git-blog is prepared for serving (git post-recieve hook prepared)'
 end
 
 desc 'Create and open for editing a new post'
@@ -75,7 +85,7 @@ task :post do
   end
   
   unless @resume
-    File.open temporary_post, File::RDWR|File::TRUNC|File::CREAT do |post|
+    File.open temporary_post, File::RDWR|File::TRUNC|File::CREAT, 0664 do |post|
       post.puts  'Replace this text with your title!'
       post.puts  '=================================='
       post.print "\n"; post.close
@@ -84,7 +94,7 @@ task :post do
   
   system "#{ENV['VISUAL']} #{temporary_post}"
   
-  first_line = File.open(temporary_post, File::RDWR|File::CREAT).gets.chomp
+  first_line = File.open(temporary_post, File::RDONLY).gets.chomp
   markup = case first_line
     when /^\</        then 'xhtml'
     when /^\%/        then 'haml'
@@ -143,7 +153,7 @@ task :deploy => :clobber do
       to_html(Object.new, {:content => parsed, :title => post_title})
     
     destination = path.gsub /.#{markup}$/, '.xhtml'
-    file = File.open destination, File::RDWR|File::TRUNC|File::CREAT
+    file = File.open destination, File::RDWR|File::TRUNC|File::CREAT, 0664
     file.puts completed
     file.close
     puts "#{path} -> #{destination} (as #{markup})"
