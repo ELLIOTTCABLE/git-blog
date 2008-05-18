@@ -1,4 +1,4 @@
 #!/bin/bash
-cd ../
 GIT_DIR=$(pwd) # I do not know, for the life of me, why this is necessary.
+cd ../
 rake post_receive
