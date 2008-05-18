@@ -1,0 +1,18 @@
+!!! xml
+!!! 1.1
+%html{:xmlns => 'http://www.w3.org/1999/xhtml', :'xml:lang' => 'en'}
+  %head
+    %meta{:'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml;charset=utf-8'}
+    %title yet another git-blog
+    %link{:rel => 'stylesheet', :href => 'design/main.css', :type => 'text/css;charset=utf-8'}
+    / %link{:rel => 'alternate', :href => '/posts/feed.rss', :type => 'application/rss+xml', :title => 'Feed (RSS 2.0)'}
+    / %link{:rel => 'alternate', :href => '/posts/feed.atom', :type => 'application/atom+xml', :title => 'Feed (Atom)'}
+  %body
+    %h1 yet another git-blog
+    %ol#posts
+      - for post in posts
+        %li
+          %a{:href => "posts/#{post[:slug]}", :title => post[:title]}= post[:title]
+    #footer
+      :markdown
+        powered by [git-blog](http://github.com/elliottcable/git-blog "elliottcable's git-blog on GitHub"), by [elliottcable](http://elliottcable.name "elliottcable")

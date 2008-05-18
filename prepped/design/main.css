@@ -11,3 +11,20 @@ h1 {
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   text-transform: uppercase;
 }
+
+#posts {
+  
+}
+
+#posts li {
+  list-style-type: none;
+  text-align: center;
+  font-size: 150%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 85%;
+}

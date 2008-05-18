@@ -136,8 +136,32 @@ task :clobber do
   end
 end
 
+# desc 'Invisible task, generates index.xhtml'
+task :index do
+  path = File.expand_path('.')
+  repo = should_be_initialized path
+  
+  commits = repo.log.select {|c| c.message =~ /New post: /}
+  posts = []
+  commits.map do |commit|
+    title = commit.message.match(/New post: (.*)$/)[1]
+    posts << {:title => title, :slug => title.slugize}
+  end
+  
+  template = IO.read :design / :index.haml
+  
+  completed = Haml::Engine.new(template, :filename => :design / :index.haml).
+    to_html Object.new, :posts => posts
+  
+  destination = :index.xhtml
+  file = File.open destination, File::RDWR|File::TRUNC|File::CREAT, 0664
+  file.puts completed
+  file.close
+  puts "index.xhtml compiled"
+end
+
 desc 'Generate xhtml files from posts and design'
-task :deploy => :clobber do
+task :deploy => [:clobber, :index] do
   should_be_initialized File.expand_path('.')
   
   Dir['posts/*.*'].each do |path|
@@ -155,7 +179,7 @@ task :deploy => :clobber do
     template = IO.read :design / :post.haml
     
     completed = Haml::Engine.new(template, :filename => :design / :post.haml).
-      to_html(Object.new, {:content => parsed, :title => post_title})
+      to_html Object.new, {:content => parsed, :title => post_title}
     
     destination = path.gsub /.#{markup}$/, '.xhtml'
     file = File.open destination, File::RDWR|File::TRUNC|File::CREAT, 0664
@@ -179,4 +203,5 @@ def should_be_initialized path
   raise "** You haven't used `rake initialize` yet." unless
     File.directory? File.join(path, 'posts') and
     (blog = Git.open path rescue false)
+  blog
 end
