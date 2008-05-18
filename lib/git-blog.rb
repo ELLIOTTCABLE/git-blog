@@ -30,6 +30,8 @@ task :initialize do
       chmod 0664, file
     end
   end
+  chmod 0664, '.gitignore'
+  chmod 0664, :posts / '.gitignore'
   
   blog.add
   blog.commit_all("A bird... no, a plane... no, a git-blog!")
