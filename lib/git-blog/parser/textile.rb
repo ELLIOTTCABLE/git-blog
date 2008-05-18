@@ -5,7 +5,7 @@ module GitBlog
     module Textile
       def self.parse input
         input.gsub!(/^(.*)(\n\s+)*\n/m, '')
-        ::RedCloth.new(input).to_html [:textile, :markdown]
+        ::RedCloth.new(input).to_html
       end
     end
   end

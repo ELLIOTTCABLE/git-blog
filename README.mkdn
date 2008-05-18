@@ -42,7 +42,8 @@ To run git-blog, you need the following gems:
 
 * gem install git
 * gem install haml (if you wish to create your templates or write your posts in haml)
-* gem install RedCloth (if you wish to write your posts in Textile or Markdown)
+* gem install RedCloth (if you wish to write your posts in Textile)
+* gem install maruku (if you wish to write your posts in Markdown)
 
 To develop and contribute to git-blog, you also need:
 
