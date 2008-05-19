@@ -1,5 +1,5 @@
 class File
-  Extensions = %r=^(markdown|textile|haml|sass|css|html|xhtml|rb|txt|text)$=i
+  Extensions = %r=^(markdown|textile|haml|sass|css|html|xhtml|rb|txt|text|atom|rss|xml)$=i
   module Extension
     def method_missing(meth, *args)
       if Extensions =~ meth.to_s
