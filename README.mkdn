@@ -15,6 +15,49 @@ git-blog will never be featureful, but it will also never be bloated. I doubt
 I will ever do anything more than parsing the posts to static HTML on every
 git-push.
 
+Preparing git-blog
+------------------
+
+To prepare a new git-blog, run this task from the cloned git-blog repository, replacing `~/Documents/Blog` (my personal favorite location) the name of the folder where you want your blog to exist locally:
+
+    rake create[~/Documents/Blog]
+
+After this is complete, move to that folder (something along the lines of `cd ~/Documents/Blog`), and then add any remote repositories to which you wish to push your blog. Most likely, this will include the server hosting your blog to the web. The simplest setup to push to this server is an SSH connection - if you have SSH access to your server/host, you can run this to set up git-blog for pushing:
+
+    git-remote add blog username@host.tld:/path/to/server/blog/folder
+
+This will prepare a remote named 'blog' to which you can push your changes. In addition, if you use [GitHub](http://github.com "GitHub - free Git repository hosting"), you can also push your blog there. Create a new repository on GitHub, and then use this to automatically set up that remote for you:
+
+    rake github[github_username,github_repo]
+
+Now, you'll want to set up the server to host git-blog - this is fairly simple, about equable to setting up git-blog locally. The only addition, after creating the blog's directory on the server the same as you did locally (`rake create[/path/to/server/blog/folder]`, from within the git-blog clone dir on your server), is preparing the post-receive hook. It's really simple - change directory to your new blog's folder on the server, and run this:
+
+    rake servable
+
+Using git-blog
+--------------
+
+Once your new blog is prepared, you'll want to write a post. Writing a new post is quite simple - run `rake post`, and it will open your favorite `$EDITOR` with a post prepared to edit.
+
+You're free to format your blog posts however you want - at the moment there are parsers set up for Markdown, Textile, and Haml - and support for plain text and plain X)HTML. The only restriction when formatting, is that your post's title is on the very first line, formatted plainly in whatever way your parser supports. This title will not appear in the final post, and will instead be sent to the post template.
+
+Once you've finished editing your post, save it, and close the window or exit the editor (whatever is appropriate for your editor of choice) - it will automatically add the new post to the index, and then commit it. You can repeat this process if you want to post more posts before pushing them to the server.
+
+Now just push your beautiful new post(s) to the server:
+
+    git-push blog
+
+I suggest you run `rake deploy` before comitting any new posts / changes to post - if you have a syntax error in one of your posts, the parser may not like it, and it's preferable to catch this before you commit the changes and push them to your blog.
+
+git-blog will automatically re-parse all of your posts, and create an index file for your blog, after you git-push to the server. They're going to end up as simple static HTML, so there's nearly no load on your server when a page is visited - this makes a git-blog inherently faster and cheaper to run than any dynamic blog (such as Wordpress or Expression Engine) could ever be.
+
+Customizing git-blog
+--------------------
+
+Your git-blog's design is all stored in the same repository as your posts - it consists of, simply, two Haml files that are rendered with the posts. One, `post.haml`, is the layout framework into which your posts' content will be pushed; and the other, `index.haml`, is the framework for the index page of your blog. Customizing the look and feel of your blog is as simple as modifying these two files to your liking, see the defaults for an example.
+
+The git-blog rakefile itself is meant to be very hackable, and if you want to add further functionality - a different parsing system for your favorite markup, or extensions to the existing parsers for your frequently-used markup, or new blog features such as comments, trackbacks, feeds, and so on... it's as simple as fiddling around with git-blog's core. Don't be afraid, it's meant to be broken! If you *do* end up adding something cool to git-blog, I would very much appreciate it if you told me, I'll gladly link to your github fork from this README for other users to see.
+
 Getting
 -------
 
@@ -38,15 +81,20 @@ previously described, and then using [ditz][6] to add an issue.
 Requirements
 ------------
 
-To run git-blog, you need the following gems:
+To run git-blog, you need git (obviously) - on a Macintosh, you can install it using MacPorts as follows:
 
-* gem install git
-* gem install haml (if you wish to create your templates or write your posts in haml)
-* gem install RedCloth (if you wish to write your posts in Textile or Markdown)
+    sudo port install git-core
+
+On a Linux or Windows machine, you're a bit more on your own, as I don't know how to install it on Windows, and I'm assuming a person using a Linux distrib is proficient enough to figure it out. In addition, you need the following gems:
+
+* `gem install git`
+* `gem install haml` (if you wish to create your templates or write your posts in haml)
+* `gem install RedCloth` (if you wish to write your posts in Textile)
+* `gem install Maruku` (if you wish to write your posts in Markdown)
 
 To develop and contribute to git-blog, you also need:
 
-* gem install rspec
-* gem install rake
-* gem install rcov
-* gem install technomancy-ditz --source=http://gems.github.com
+* `gem install rspec`
+* `gem install rake`
+* `gem install rcov`
+* `gem install technomancy-ditz --source=http://gems.github.com`
