@@ -5,8 +5,8 @@ type: :feature
 component: git-blog
 release: 
 reporter: elliottcable <git@elliottcable.name>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-17 20:54:23.463789 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - elliottcable <git@elliottcable.name>
   - created
   - ""
+- - 2008-05-25 22:03:30.882765 Z
+  - elliott cable <git@elliottcable.name>
+  - closed issue with disposition fixed
+  - Got an index page up. Nothing pretty, but it works. To some extent.
