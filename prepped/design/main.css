@@ -23,8 +23,16 @@ h1 {
 }
 
 #footer {
-  position: absolute;
-  bottom: 10px;
-  right: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  background: white;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
   font-size: 85%;
+}
+
+#footer p {
+  margin: 0 !important;
+  padding: 0 !important;
 }
