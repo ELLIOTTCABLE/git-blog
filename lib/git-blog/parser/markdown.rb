@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'maruku'
 
 module GitBlog
@@ -10,3 +11,4 @@ module GitBlog
     end
   end
 end
+

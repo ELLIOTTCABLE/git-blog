@@ -172,14 +172,15 @@ task :deploy => [:clobber, :index] do
     post_title = (first_line.match GitBlog::TitleRegexen[markup])[1]
     parsed = begin
       parser = GitBlog::Parsers.const_get(markup.gsub(/\b\w/){$&.upcase})
-      out = parser.send :parse, content
-      out
+      parser.send :parse, content
     end
     
     template = IO.read :design / :post.haml
     
     completed = Haml::Engine.new(template, :filename => :design / :post.haml).
       to_html Object.new, {:content => parsed, :title => post_title}
+    
+    completed = GitBlog::Parsers::fix_pres(completed)
     
     destination = path.gsub /.#{markup}$/, '.xhtml'
     file = File.open destination, File::RDWR|File::TRUNC|File::CREAT, 0664
