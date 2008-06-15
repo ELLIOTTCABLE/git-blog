@@ -12,7 +12,7 @@ task :create, :destination do |_, params|
   
   mkdir destination rescue nil
   File.open destination/:Rakefile.rb, File::RDWR|File::TRUNC|File::CREAT do |rakefile|
-    rakefile.puts "$:.unshift File.expand_path('#{GitBlog::Location / :lib}')"
+    rakefile.puts "$:.unshift File.expand_path('#{GitBlog::Scope / :lib}')"
     rakefile.puts "require 'git-blog'"
     rakefile.print "\n"; rakefile.close
   end
