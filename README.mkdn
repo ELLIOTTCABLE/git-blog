@@ -90,7 +90,12 @@ On a Linux or Windows machine, you're a bit more on your own, as I don't know ho
 * `gem install git`
 * `gem install haml` (if you wish to create your templates or write your posts in haml)
 * `gem install RedCloth` (if you wish to write your posts in Textile)
-* `gem install Maruku` (if you wish to write your posts in Markdown)
+* One of the following Markdown libraries (if you wish to write your posts in Markdown)
+** `sudo gem install rdiscount`
+** `sudo gem install rpeg-markdown`
+** `sudo gem install maruku`
+** `sudo gem install BlueCloth`
+
 
 To develop and contribute to git-blog, you also need:
 
