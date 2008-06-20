@@ -1,12 +1,12 @@
-# rpeg-markdown
-begin
-  require 'markdown'
-  
 # Discount
+begin
+  require 'rdiscount'
+  Markdown = RDiscount
+  
+# rpeg-markdown
 rescue LoadError
   begin
-    require 'rdiscount'
-    Markdown = RDiscount
+    require 'markdown'
   
   # Maruku
   rescue LoadError
