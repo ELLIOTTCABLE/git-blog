@@ -1,18 +1,18 @@
-# Discount
+# Maruku
 begin
-  require 'rdiscount'
-  Markdown = RDiscount
+  require 'maruku'
+  Markdown = Maruku
   
 # rpeg-markdown
 rescue LoadError
   begin
     require 'markdown'
   
-  # Maruku
+  # Discount
   rescue LoadError
     begin
-      require 'maruku'
-      Markdown = Maruku
+      require 'rdiscount'
+      Markdown = RDiscount
     
     # BlueCloth
     rescue LoadError
