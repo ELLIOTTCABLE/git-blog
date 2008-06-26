@@ -2,6 +2,7 @@ require 'fileutils'
 include FileUtils
 
 require 'git-blog/core'
+require 'haml'
 
 desc 'Setup the blog repository'
 task :initialize do
