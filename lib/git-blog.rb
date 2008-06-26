@@ -171,6 +171,7 @@ task :deploy => [:clobber, :index] do
     
     post_title = (first_line.match GitBlog::TitleRegexen[markup])[1]
     parsed = begin
+      require "git-blog/parser/#{markup.downcase}"
       parser = GitBlog::Parsers.const_get(markup.gsub(/\b\w/){$&.upcase})
       parser.send :parse, content
     end
