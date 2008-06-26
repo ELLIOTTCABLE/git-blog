@@ -12,8 +12,8 @@ module GitBlog
   
   # Returns the path of file relative to the git-blog root.
   # 'Borrowed' mostly wholesale from Haml 2.0.0 d-:
-  def self.Scope
-    File.expand_path( File.dirname(__FILE__) / '..' / '..' )
+  def self.Scope path
+    File.join(File.expand_path( File.dirname(__FILE__) / '..' / '..' ), path.to_s)
   end
 end
 

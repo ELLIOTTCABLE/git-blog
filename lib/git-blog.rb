@@ -15,12 +15,12 @@ task :initialize do
   cd path
   mkdir 'posts'
   mkdir 'design'
-  cp GitBlog::Scope / :prepped / '.gitignore', '.'
+  cp GitBlog::Scope :prepped / '.gitignore', '.'
   %w(welcome_to_your_git_blog.markdown .gitignore).each do |file|
-    cp GitBlog::Scope / :prepped / :posts / file, 'posts'
+    cp GitBlog::Scope :prepped / :posts / file, 'posts'
   end
   %w(main.css post.haml index.haml).each do |file|
-    cp GitBlog::Scope / :prepped / :design / file, 'design'
+    cp GitBlog::Scope :prepped / :design / file, 'design'
   end
   
   Dir['**/**'].each do |file|
@@ -63,7 +63,7 @@ task :servable do
   should_be_initialized File.expand_path('.')
   
   mv '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
-  cp GitBlog::Scope / :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
+  cp GitBlog::Scope :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
   chmod 0775, '.git' / :hooks / 'post-receive'
   
   puts '** git-blog is prepared for serving (git post-recieve hook prepared)'
