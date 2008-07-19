@@ -53,8 +53,8 @@ task :github, :user_name, :repo_name do |_, params|
     github = blog.add_remote 'github', github_url
     blog.push github
   else
-    system "git-init"
-    system "git-remote add -f github #{github_url}"
+    system "git init"
+    system "git remote add -f github #{github_url}"
     system "git checkout -b master github/master"
   end
 end
@@ -196,7 +196,7 @@ end
 # desc 'Invisible task, forces checkout (for the post-receive hook)'
 task :force_checkout do
   puts 'Forcing update of working copy...'
-  system 'git-checkout -f master'
+  system 'git checkout -f master'
 end
 
 # desc 'Invisible task, run as the post-receive hook'
