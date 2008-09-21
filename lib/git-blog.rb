@@ -63,9 +63,10 @@ desc 'Prepare the blog to be served (configures hooks)'
 task :servable do
   should_be_initialized File.expand_path('.')
   
-  mv '.git' / :hooks / 'post-receive', '.git' / :hooks / 'post-receive.old'
-  cp GitBlog::Scope / :prepped / 'post-receive.hook', '.git' / :hooks / 'post-receive'
-  chmod 0775, '.git' / :hooks / 'post-receive'
+  mv '.git' / 'hooks' / 'post-receive', '.git' / 'hooks' / 'post-receive.old' if
+    File.file? '.git' / 'hooks' / 'post-receive'
+  cp GitBlog::Scope / 'prepped' / 'post-receive.hook', '.git' / 'hooks' / 'post-receive'
+  chmod 0775, '.git' / 'hooks' / 'post-receive'
   
   puts '** git-blog is prepared for serving (git post-recieve hook prepared)'
 end
