@@ -144,10 +144,10 @@ gems:
 * `gem install haml`
 * `gem install RedCloth` (if you wish to write your posts in Textile)
 * One of the following Markdown libraries (if you wish to write your posts in Markdown)
-** `sudo gem install rdiscount`
-** `sudo gem install rpeg-markdown`
-** `sudo gem install maruku`
-** `sudo gem install BlueCloth`
+  * `sudo gem install rdiscount`
+  * `sudo gem install rpeg-markdown`
+  * `sudo gem install maruku`
+  * `sudo gem install BlueCloth`
 
 
 To develop and contribute to git-blog, you also need:
