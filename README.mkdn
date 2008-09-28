@@ -8,6 +8,10 @@ your server, will catch the push and parse the post to your static HTML blog.
 Fast, no dynamic code being run on every load, free post versioning (git
 revisions), free sections (git branches), freedom of mind.
 
+If you wish to discuss git-blog, or just hang around, feel free to join [the
+`#git-blog` channel](irc://irc.freenode.net/#git-blog "git-blog's IRC channel")
+on Freenode (make sure to say elliottcable's name to get his attention!)
+
 Philosophy & goals
 ------------------
 
