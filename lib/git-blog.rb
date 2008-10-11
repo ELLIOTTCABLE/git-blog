@@ -143,7 +143,7 @@ task :index do
   path = File.expand_path('.')
   repo = should_be_initialized path
   
-  commits = repo.log.select {|c| c.message =~ /New post: /}
+  commits = repo.log("b").select {|c| c.message =~ /New post: /}
   posts = []
   commits.map do |commit|
     title = commit.message.match(/New post: (.*)$/)[1]
