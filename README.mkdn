@@ -19,6 +19,26 @@ git-blog will never be featureful, but it will also never be bloated. I doubt
 I will ever do anything more than parsing the posts to static HTML on every
 `git push`.
 
+Getting
+-------
+
+The authoritative source for this project is available at
+<http://github.com/elliottcable/git-blog>. You can clone your own copy with the
+following command:
+
+    git clone git://github.com/elliottcable/git-blog.git
+
+If you want to make changes to the codebase, you need to fork your own github
+repository for said changes. Send a pullrequest to [elliottcable][5]
+when you've got something ready for the master that you think should be
+integrated into the root source.
+
+Bugs or feature requests can be submitted by forking a repository as
+previously described, and then using [ditz][6] to add an issue.
+
+  [5]: <http://github.com/elliottcable> (elliottcable on GitHub)
+  [6]: <http://ditz.rubyforge.org/> (Ditz issue tracking)
+
 Preparing git-blog
 ------------------
 
@@ -106,26 +126,6 @@ simple as fiddling around with git-blog's core. Don't be afraid, it's meant to
 be broken! If you *do* end up adding something cool to git-blog, I would very
 much appreciate it if you told me, I'll gladly link to your github fork from
 this README for other users to see.
-
-Getting
--------
-
-The authoritative source for this project is available at
-<http://github.com/elliottcable/git-blog>. You can clone your own copy with the
-following command:
-
-    git clone git://github.com/elliottcable/git-blog.git
-
-If you want to make changes to the codebase, you need to fork your own github
-repository for said changes. Send a pullrequest to [elliottcable][5]
-when you've got something ready for the master that you think should be
-integrated into the root source.
-
-Bugs or feature requests can be submitted by forking a repository as
-previously described, and then using [ditz][6] to add an issue.
-
-  [5]: <http://github.com/elliottcable> (elliottcable on GitHub)
-  [6]: <http://ditz.rubyforge.org/> (Ditz issue tracking)
 
 Requirements
 ------------
