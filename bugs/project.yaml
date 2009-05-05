@@ -1,8 +1,0 @@
---- !ditz.rubyforge.org,2008-03-06/project 
-name: git-blog
-version: "0.2"
-components: 
-- !ditz.rubyforge.org,2008-03-06/component 
-  name: git-blog
-releases: []
-
