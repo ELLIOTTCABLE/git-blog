@@ -29,11 +29,19 @@ following command:
     git clone git://github.com/elliottcable/git-blog.git
 
 If you want to make changes to the codebase, you need to fork your own github
-repository for said changes. Send a pullrequest to [elliottcable][5]
+repository for said changes. Send a pullrequest to [elliottcable][1]
 when you've got something ready for the master that you think should be
 integrated into the root source.
 
-  [5]: <http://github.com/elliottcable> (elliottcable on GitHub)
+This project has been forked several times with different goals. Due to an
+almost draconian anti-bloat policy, as well as other concerns (see the History
+section below), these haven't been (and probably never will be) merged into
+the origin repository. One fork worth checking out is [evaryont's][2], which
+is the official maintained-stable fork of git-blog's original, ultra-simple
+Rakefile format.
+
+  [1]: <http://github.com/elliottcable> (elliottcable on GitHub)
+  [2]: <http://github.com/evaryont/git-blog> (evaryont's fork of git-blog on GitHub)
 
 Preparing git-blog
 ------------------
