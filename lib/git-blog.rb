@@ -84,9 +84,9 @@ task :post do
     puts '** You have an unfinished post from before,'
     puts 'do you want to r)esume it or overwrite it with a n)ew one? '
     case STDIN.gets
-    when /r/i
+    when /r/iu
       @resume = true
-    when /n/i
+    when /n/iu
       # do nothing, go on to overwriting it
     else
       raise 'Invalid entry, exiting out'
@@ -105,9 +105,9 @@ task :post do
   
   first_line = File.open(temporary_post, File::RDONLY).gets.chomp
   markup = case first_line
-    when /^\</        then 'xhtml'
-    when /^\%/        then 'haml'
-    when /^\#|h\d\./  then 'textile'
+    when /^\</u        then 'xhtml'
+    when /^\%/u        then 'haml'
+    when /^\#|h\d\./u  then 'textile'
     else                   'markdown'
   end
 
@@ -145,10 +145,10 @@ task :index do
   path = File.expand_path('.')
   repo = should_be_initialized path
   
-  commits = repo.log("b").select {|c| c.message =~ /New post: /}
+  commits = repo.log("b").select {|c| c.message =~ /New post: /u}
   posts = []
   commits.map do |commit|
-    title = commit.message.match(/New post: (.*)$/)[1]
+    title = commit.message.match(/New post: (.*)$/u)[1]
     posts << {:title => title, :slug => title.slugize}
   end
   
@@ -169,14 +169,14 @@ task :deploy => [:clobber, :index] do
   should_be_initialized File.expand_path('.')
   
   Dir['posts/*.*'].each do |path|
-    markup = File.extname(path).downcase.gsub(/^\./,'')
+    markup = File.extname(path).downcase.gsub(/^\./u,'')
     content = IO.read path
-    first_line = content.match(/^(.*)\n/)[1]
+    first_line = content.match(/^(.*)\n/u)[1]
     
     post_title = (first_line.match GitBlog::TitleRegexen[markup])[1]
     parsed = begin
       require "git-blog/parser/#{markup.downcase}"
-      parser = GitBlog::Parsers.const_get(markup.gsub(/\b\w/){$&.upcase})
+      parser = GitBlog::Parsers.const_get(markup.gsub(/\b\w/u){$&.upcase})
       parser.send :parse, content
     end
     
@@ -187,7 +187,7 @@ task :deploy => [:clobber, :index] do
     
     completed = GitBlog::Parsers::fix_pres(completed)
     
-    destination = path.gsub /.#{markup}$/, '.xhtml'
+    destination = path.gsub /.#{markup}$u/, '.xhtml'
     file = File.open destination, File::RDWR|File::TRUNC|File::CREAT, 0664
     file.puts completed
     file.close
