@@ -68,6 +68,8 @@ task :servable do
   cp GitBlog::Scope / 'prepped' / 'post-receive.hook', '.git' / 'hooks' / 'post-receive'
   chmod 0775, '.git' / 'hooks' / 'post-receive'
   
+  system "git config receive.denyCurrentBranch ignore"
+  
   puts '** git-blog is prepared for serving (git post-recieve hook prepared)'
 end
 
@@ -197,7 +199,7 @@ end
 # desc 'Invisible task, forces checkout (for the post-receive hook)'
 task :force_checkout do
   puts 'Forcing update of working copy...'
-  system 'git checkout -f master'
+  system 'git reset --hard master'
 end
 
 # desc 'Invisible task, run as the post-receive hook'
