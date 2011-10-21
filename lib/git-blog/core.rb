@@ -9,7 +9,7 @@ module GitBlog
     'textile'   => /^h\d(?:[^\s\{]|\{[^\}]*\})*\. (.*)$/,
     'markdown'  => /^(.*)$/ # Also works for other
   }
-  
+
   # Returns the path of file relative to the git-blog root.
   # 'Borrowed' mostly wholesale from Haml 2.0.0 d-:
   # def self.Scope path

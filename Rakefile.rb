@@ -9,7 +9,7 @@ desc 'Create a new git-blog'
 task :create, :destination do |_, params|
   destination = params[:destination].nil? ? './blog' : params[:destination]
   destination = File.expand_path destination
-  
+
   mkdir destination rescue nil
   File.open destination/:Rakefile.rb, File::RDWR|File::TRUNC|File::CREAT do |rakefile|
     rakefile.puts "$:.unshift File.expand_path('#{GitBlog::Scope / :lib}')"
