@@ -2,18 +2,18 @@
 begin
   require 'maruku'
   Markdown = Maruku
-  
+
 # rpeg-markdown
 rescue LoadError
   begin
     require 'markdown'
-  
+
   # Discount
   rescue LoadError
     begin
       require 'rdiscount'
       Markdown = RDiscount
-    
+
     # BlueCloth
     rescue LoadError
       require 'bluecloth'
