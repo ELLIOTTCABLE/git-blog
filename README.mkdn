@@ -101,7 +101,7 @@ Now just push your beautiful new post(s) to the server:
 
     git push blog
 
-I suggest you run `rake deploy` before comitting any new posts / changes to
+I suggest you run `rake deploy` before committing any new posts / changes to
 post - if you have a syntax error in one of your posts, the parser may not
 like it, and it's preferable to catch this before you commit the changes and
 push them to your blog.
