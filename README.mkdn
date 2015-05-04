@@ -9,8 +9,14 @@ Fast, no dynamic code being run on every load, free post versioning (git
 revisions), free sections (git branches), freedom of mind.
 
 If you wish to discuss git-blog, or just hang around, feel free to join [the
-`#git-blog` channel](irc://irc.freenode.net/#git-blog "git-blog's IRC channel")
-on Freenode (make sure to say elliottcable's name to get his attention!)
+`#ELLIOTTCABLE` channel](irc://irc.freenode.net/#ELLIOTTCABLE "ELLIOTTCABLE's IRC channel")
+on Freenode (make sure to say his name to get his attention!)
+
+**Note:** This project is functional, but not under active development (as is
+probably obvious from the last-modified dates above.) If anything breaks, please
+feel free to [open an issue](https://github.com/ELLIOTTCABLE/git-blog/issues)
+or mention it in the IRC channel above. Feature requests are likely to go
+unfulfilled; but pull-requests are welcome. (=
 
 Philosophy & goals
 ------------------
