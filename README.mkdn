@@ -1,5 +1,7 @@
-git-blog
+git-blog <a href="#philosophy--goals"><img alt='Maintenance status' src="https://img.shields.io/badge/maintained%3F-feature--frozen_~2015-lightgrey.svg?style=flat"></a><img src="http://elliottcable.s3.amazonaws.com/p/8x8.png"><a target="_blank" href="https://codacy.com/app/ELLIOTTCABLE/git-blog"><img alt='Code quality and health' src="https://img.shields.io/codacy/7287a49013f54f9bac99a15ad5222dee.svg?style=flat&label=health"></a><img src="http://elliottcable.s3.amazonaws.com/p/8x8.png"><a target="_blank" href="COPYING.text"><img alt='Open-source licensing details' src="https://img.shields.io/badge/license-ISC-blue.svg?style=flat"></a><img src="http://elliottcable.s3.amazonaws.com/p/8x8.png"><a target="_blank" href="http://ell.io/IRC"><img alt='Chat on Freenode' src="https://img.shields.io/badge/chat-IRC-blue.svg"></a><img src="http://elliottcable.s3.amazonaws.com/p/8x8.png"><a target="_blank" href="http://twitter.com/ELLIOTTCABLE"><img alt='Twitter followers' src="https://img.shields.io/twitter/follow/ELLIOTTCABLE.svg?style=flat&label=followers&color=blue"></a>
 ========
+
+
 
 git-blog intends to be blogging, simplified. You'll write your posts in your
 favorite text editor, with your favorite markup. Then save the post's file,
@@ -12,18 +14,19 @@ If you wish to discuss git-blog, or just hang around, feel free to join [the
 `#ELLIOTTCABLE` channel](irc://irc.freenode.net/#ELLIOTTCABLE "ELLIOTTCABLE's IRC channel")
 on Freenode (make sure to say his name to get his attention!)
 
-**Note:** This project is functional, but not under active development (as is
-probably obvious from the last-modified dates above.) If anything breaks, please
-feel free to [open an issue](https://github.com/ELLIOTTCABLE/git-blog/issues)
-or mention it in the IRC channel above. Feature requests are likely to go
-unfulfilled; but pull-requests are welcome. (=
-
 Philosophy & goals
 ------------------
 
 git-blog will never be featureful, but it will also never be bloated. I doubt
 I will ever do anything more than parsing the posts to static HTML on every
 `git push`.
+
+**Note:** This project is functional, but not under active development (as is
+probably obvious from the last-modified dates above.) If anything breaks, please
+feel free to [open an issue](https://github.com/ELLIOTTCABLE/git-blog/issues)
+or mention it in the IRC channel above. Feature requests are likely to go
+unfulfilled; but pull-requests are welcome. (=
+
 
 Getting
 -------
